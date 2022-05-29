@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://kit.fontawesome.com/5779bd7568.js" crossorigin="anonymous"></script>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+		<link rel="stylesheet" href="style.css" />
+		<title>Odin Library Project</title>
+	</head>
+	<body>
+		<div class="container">
+			<!-- nav start -->
+			<nav class="nav">
+				<div class="nav-content">
+					<div class="library">
+						<span class="material-icons">library_books</span>
+						<span>Book Library</span>
+					</div>
+					<div class="reading-now">
+						<span class="material-icons" data-action="renderReadingNow">repeat</span>
+						<span>Reading Now</span>
+					</div>
+					<div class="books">
+						<span class="material-icons" data-action="renderAllBooks">menu_book</span>
+						<span>Books</span>
+					</div>
+					<div class="favorites">
+						<span class="material-icons" data-action="renderFavorites">star_border</span>
+						<span>Favorites</span>
+					</div>
+					<div class="to-read">
+						<span class="material-icons" data-action="renderToRead">schedule</span>
+						<span>To Read</span>
+					</div>
+					<div class="have-read">
+						<span class="material-icons" data-action="renderHaveRead">done_all</span>
+						<span>Have Read</span>
+					</div>
+					<div class="authors">
+						<span class="material-icons" data-action="renderAuthors">person</span>
+						<span>Authors</span>
+					</div>
+					<div class="trash">
+						<span class="material-icons" data-action="renderDeleted">delete_outline</span>
+						<span>Trash</span>
+					</div>
+				</div>
+			</nav>
+			<!-- nav end -->
+
+			<!-- header start -->
+			<header class="header">
+				<span class="material-icons open-menu">menu</span>
+				<span class="list-title">Now Reading</span>
+				<span class="material-icons toggle-theme">brightness_medium</span>
+				<span class="material-icons search">search</span>
+				<span class="material-icons sort">sort</span>
+			</header>
+			<!-- header end -->
+
+			<!-- main start -->
+			<ul class="list">
+				<!-- book list item start -->
+				<li class="book-list-item-container">
+					<div class="image-container"></div>
+					<div class="info">
+						<div class="book-title">Book title</div>
+						<div class="authors-name">Author name</div>
+						<div class="pages">Pages</div>
+						<div class="timeline">
+							<div class="material-icons line">
+								<span class="material-icons point start-page">fiber_manual_record</span>
+								<span class="material-icons point current-page">fiber_manual_record</span>
+								<span class="material-icons point end-page">fiber_manual_record</span>
+							</div>
+						</div>
+						<div class="action-icons">
+							<span class="material-icons" data-action="favorite">star_border</span>
+							<span class="material-icons" data-action="toRead">schedule</span>
+							<span class="material-icons" data-action="haveRead">done_all</span>
+							<span class="material-icons" data-action="delete">delete_outline</span>
+							<span class="material-icons" data-action="edit">edit</span>
+						</div>
+					</div>
+				</li>
+				<!-- book list item end -->
+
+				<!-- Authors list start -->
+				<li class="author-list-item-container">
+					<span class="material-icons">person</span>
+					<span class="author-name">Kojo Frimpong</span>
+					<span class="number-of-author-books-in-list">2</span>
+				</li>
+				<!-- Authors list end -->
+			</ul>
+			<!-- main end -->
+		</div>
+		<script src="app.js" type="module"></script>
+	</body>
+</html>
