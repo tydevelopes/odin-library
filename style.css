@@ -8,8 +8,10 @@
 	--big-font: 500 1.8rem/2.8rem "Roboto Flex";
 	--medium-font: 400 1.6rem/2.4rem "Roboto Flex";
 	--small-font: 300 1.4rem/2rem "Roboto Flex";
+	--thin-font: 200 1.2rem/1.8rem "Roboto Flex";
 	--medium-space: 2rem;
 	--small-space: 1rem;
+	--thin-space: 0.5rem;
 }
 :root.light {
 	--body-color: #f1f5f9;
@@ -243,4 +245,86 @@ body {
 }
 .author-name {
 	flex: 1;
+}
+
+/* Add/Edit styles */
+.list-item {
+	background-color: var(--card-bg-color);
+	padding: var(--small-space);
+	display: flex;
+	flex-direction: column;
+	border-radius: 0.2rem;
+}
+.list-item-description {
+	color: var(--main-text-color);
+	opacity: 0.4;
+	font: var(--thin-font);
+}
+
+.input-modal-container,
+.authors-modal-container {
+	font: var(--medium-font);
+	background-color: rgba(0, 0, 0, 0.6);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: var(--medium-space);
+	/* display: none; */
+}
+.input-modal-content,
+.authors-modal-content {
+	background-color: var(--card-bg-color);
+	width: min(500px, 100%);
+	padding: var(--medium-space);
+	display: flex;
+	flex-direction: column;
+	gap: var(--medium-space);
+	border-radius: 0.2rem;
+}
+.input-label {
+	align-self: center;
+}
+.input {
+	border: none;
+	background-color: transparent;
+	border-bottom: 1px solid var(--golden);
+	color: var(--main-text-color);
+	padding-bottom: var(--thin-space);
+	caret-color: var(--golden);
+}
+.input:focus {
+	outline: none;
+}
+.buttons-container {
+	display: flex;
+	justify-content: end;
+	gap: calc(var(--medium-space) * 3);
+}
+
+.buttons-container > button {
+	background-color: transparent;
+	border: none;
+	text-align: center;
+	text-decoration: none;
+	font: var(--small-font);
+	color: var(--golden);
+}
+.buttons-container > .select-author {
+	color: var(--main-text-color);
+	opacity: 0.4;
+}
+.authors-label {
+	color: var(--main-text-color);
+	opacity: 0.6;
+	align-self: center;
+}
+.author-name {
+	color: var(--main-text-color);
+	border-bottom: 1px solid var(--body-color);
+	padding: var(--small-space);
 }

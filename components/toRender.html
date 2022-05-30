@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<!-- book list item start -->
+		<li class="book-list-item-container">
+			<div class="image-container"></div>
+			<div class="info">
+				<div class="book-title">Book title</div>
+				<div class="authors-name">Author name</div>
+				<div class="pages">Pages</div>
+				<div class="timeline">
+					<div class="material-icons line">
+						<span class="material-icons point start-page">fiber_manual_record</span>
+						<span class="material-icons point current-page">fiber_manual_record</span>
+						<span class="material-icons point end-page">fiber_manual_record</span>
+					</div>
+				</div>
+				<div class="action-icons">
+					<span class="material-icons" data-action="favorite">star_border</span>
+					<span class="material-icons" data-action="toRead">schedule</span>
+					<span class="material-icons" data-action="haveRead">done_all</span>
+					<span class="material-icons" data-action="delete">delete_outline</span>
+					<span class="material-icons" data-action="edit">edit</span>
+				</div>
+			</div>
+		</li>
+		<!-- book list item end -->
+
+		<!-- Authors list start -->
+		<li class="author-list-item-container">
+			<span class="material-icons">person</span>
+			<span class="author-name">Kojo Frimpong</span>
+			<span class="number-of-author-books-in-list">2</span>
+		</li>
+		<!-- Authors list end -->
+
+		<!-- Add/Edit form start -->
+		<div class="container">
+			<!-- header start -->
+			<header class="header">
+				<span class="material-icons go-back">arrow_back</span>
+				<span class="session">Add</span>
+			</header>
+			<!-- header end -->
+
+			<!-- main start -->
+			<ul class="list">
+				<li class="list-item">
+					<span class="list-item-input">---</span>
+					<span class="list-item-description">Title</span>
+				</li>
+				<li class="list-item">
+					<span class="list-item-input">---</span>
+					<span class="list-item-description">Author</span>
+				</li>
+				<li class="list-item">
+					<span class="list-item-input">---</span>
+					<span class="list-item-description">Pages</span>
+				</li>
+				<li class="list-item">
+					<span class="list-item-input">---</span>
+					<span class="list-item-description">Pages Read</span>
+				</li>
+			</ul>
+			<!-- input modal start -->
+			<div class="input-modal-container">
+				<div class="input-modal-content">
+					<div class="input-label">Title</div>
+					<input type="text" class="input" />
+					<div class="buttons-container">
+						<button class="select-author">CHOOSE</button>
+						<button class="save">SAVE</button>
+					</div>
+				</div>
+			</div>
+			<!-- input modal end -->
+			<!-- main end -->
+		</div>
+		<!-- Add/Edit form end -->
+
+		<!-- Author list start -->
+		<!-- input modal start -->
+		<div class="authors-modal-container">
+			<div class="authors-modal-content">
+				<div class="authors-label">Select author</div>
+				<ul class="authors-list list">
+					<li class="author-name">Author Name</li>
+					<li class="author-name">Author Name</li>
+					<li class="author-name">Author Name</li>
+					<li class="author-name">Author Name</li>
+					<li class="author-name">Author Name</li>
+					<li class="author-name">Author Name</li>
+					<li class="author-name">Author Name</li>
+					<li class="author-name">Author Name</li>
+					<li class="author-name">Author Name</li>
+					<li class="author-name">Author Name</li>
+					<li class="author-name">Author Name</li>
+					<li class="author-name">Author Name</li>
+				</ul>
+			</div>
+		</div>
+		<!-- input modal end -->
+		<!-- Author list end -->
+	</body>
+</html>
