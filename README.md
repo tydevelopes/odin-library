@@ -2,7 +2,7 @@
 
 ### TODO :-
 
-- [ ] Save generated booklist to local storage
+- [x] Save generated booklist to local storage
 - [ ] Write logic to load list when a menu item is clicked
   - [ ] reading now
   - [ ] all books
