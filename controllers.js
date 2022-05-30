@@ -17,8 +17,7 @@ export const getBooksByAuthor = name => {};
 export const getDeletedBooks = () => {};
 
 //  functions to render contents to screen
-export const renderBooks = () => {
-	const books = getBooks();
+const renderBooks = books => {
 	return books
 		.map(book => {
 			const { id, title, author, pages, pagesRead, favorite, toRead, haveRead, nowReading } = book;
@@ -47,6 +46,10 @@ export const renderBooks = () => {
 		</li>`;
 		})
 		.join("");
+};
+export const renderAllBooks = () => {
+	const books = getBooks();
+	return renderBooks(books);
 };
 export const renderReadingNow = books => {};
 export const renderToRead = books => {};

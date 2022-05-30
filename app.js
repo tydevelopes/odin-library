@@ -1,4 +1,4 @@
-import { renderBooks } from "./controllers.js";
+import { renderAllBooks } from "./controllers.js";
 import { navItems, list, listTitle } from "./domElements.js";
 
 // toggle theme
@@ -61,7 +61,7 @@ function renderList(e) {
 		case "renderReadingNow":
 			break;
 		case "renderAllBooks":
-			list.innerHTML = renderBooks();
+			list.innerHTML = renderAllBooks();
 			break;
 		case "renderFavorites":
 			break;
