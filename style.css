@@ -69,6 +69,7 @@ body {
 	height: 100vh;
 	/* display: flex; */
 	display: none;
+	z-index: 10;
 }
 .nav-content {
 	background-color: var(--card-bg-color);
@@ -328,3 +329,5 @@ body {
 	border-bottom: 1px solid var(--body-color);
 	padding: var(--small-space);
 }
+
+/*  */

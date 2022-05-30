@@ -1,3 +1,6 @@
+import { renderBooks } from "./controllers.js";
+import { navItems, list, listTitle } from "./domElements.js";
+
 // toggle theme
 const toggleThemeEl = document.querySelector(".toggle-theme");
 const root = document.documentElement;
@@ -46,8 +49,6 @@ navContentEl.addEventListener("click", e => {
 });
 
 // Add  Click Event Listeners to menu items except the first one
-const navItems = document.querySelectorAll(".nav-content > div:not(:first-child)");
-const listTitle = document.querySelector(".list-title");
 
 navItems.forEach(navItem => {
 	navItem.addEventListener("click", renderList);
@@ -55,10 +56,26 @@ navItems.forEach(navItem => {
 
 // Event handlers
 function renderList(e) {
-	/**
-	 * TODO -
-	 * [] render list depending on what was clicked
-	 */
+	console.log(e.currentTarget);
+	switch (e.currentTarget.dataset.action) {
+		case "renderReadingNow":
+			break;
+		case "renderAllBooks":
+			list.innerHTML = renderBooks();
+			break;
+		case "renderFavorites":
+			break;
+		case "renderToRead":
+			break;
+		case "renderHaveRead":
+			break;
+		case "renderAuthors":
+			break;
+		case "renderDeleted":
+			break;
+		default:
+			break;
+	}
 	removeAllActiveClass();
 	// Grab text, change item color and place into header title
 	e.currentTarget.classList.add("active");
