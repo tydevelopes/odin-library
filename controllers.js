@@ -146,7 +146,7 @@ export const renderAuthors = () => {
 	return {
 		authorsList: authorsAndBookCount
 			.map(({ name, booksWritten }) => {
-				return `<li class="author-list-item-container">
+				return `<li class="author-list-item-container" data-author="${name}">
 			<span class="material-icons">person</span>
 			<span class="author-name">${name}</span>
 			<span class="number-of-author-books-in-list">${booksWritten}</span>

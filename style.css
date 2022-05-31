@@ -246,6 +246,9 @@ body {
 	align-items: center;
 	gap: var(--medium-space);
 }
+.author-list-item-container:hover {
+	cursor: pointer;
+}
 .author-name {
 	flex: 1;
 }
