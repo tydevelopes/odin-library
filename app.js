@@ -5,6 +5,7 @@ import {
 	renderHaveRead,
 	renderFavorites,
 	renderAuthors,
+	renderBooksByAuthor,
 } from "./controllers.js";
 import { navItems, list, listTitle, bookCount } from "./domElements.js";
 import { books } from "./bookListGenerator/books.js";
@@ -57,12 +58,11 @@ navContentEl.addEventListener("click", e => {
 });
 
 // Add  Click Event Listeners to menu items except the first one
-
 navItems.forEach(navItem => {
 	navItem.addEventListener("click", renderList);
 });
 
-// Event handlers
+// Nav Items Event handlers
 function renderList(e) {
 	switch (e.currentTarget.dataset.action) {
 		case "renderReadingNow":
@@ -94,6 +94,15 @@ function renderList(e) {
 			const { authorsList, authorsCount } = renderAuthors();
 			bookCount.textContent = `${authorsCount}`;
 			list.innerHTML = authorsList;
+			// Event to render books by author
+			const authorListItem = document.querySelectorAll(".author-list-item-container");
+			authorListItem.forEach(el => {
+				el.addEventListener("click", e => {
+					const { booksList, count } = renderBooksByAuthor(e.currentTarget.dataset.author);
+					bookCount.textContent = `${count}`;
+					list.innerHTML = booksList;
+				});
+			});
 			break;
 		case "renderDeleted":
 			break;

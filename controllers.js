@@ -36,7 +36,14 @@ export const getAuthors = () => {
 		};
 	});
 };
-export const getBooksByAuthor = name => {};
+export const getBooksByAuthor = name => {
+	/**
+	 * TODO:-
+	 * get all books
+	 * go through all books and return a book if it match name
+	 */
+	return getBooks().filter(book => book.author.includes(name));
+};
 export const getDeletedBooks = () => {};
 
 //  functions to render contents to screen
@@ -156,7 +163,13 @@ export const renderAuthors = () => {
 		authorsCount: authorsAndBookCount.length,
 	};
 };
-export const renderBooksByAuthor = books => {};
+export const renderBooksByAuthor = name => {
+	const books = getBooksByAuthor(name);
+	return {
+		booksList: renderBooks(books),
+		count: books.length,
+	};
+};
 export const renderDeletedBooks = books => {};
 
 //  functions to perform actions on a single books
