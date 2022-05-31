@@ -9,9 +9,13 @@
   - [x] favorites
   - [x] to read
   - [x] have read
-  - [ ] authors
+  - [x] authors
   - [ ] trash
-- [ ] On page load, render now reading
+- [x] add count of rendered books
+- [ ] add count of rendered authors
+- [ ] add count of rendered deleted books
+- [x] close nav when menu item is clicked
+- [x] On page load, render now reading
 - [ ] Logic to render author's book written when an author is clicked
 - [ ] Write functions to execute when an action icon on a book is clicked
   - [ ] favorite

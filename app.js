@@ -1,4 +1,11 @@
-import { renderAllBooks, renderReadingNow, renderToRead, renderHaveRead, renderFavorites } from "./controllers.js";
+import {
+	renderAllBooks,
+	renderReadingNow,
+	renderToRead,
+	renderHaveRead,
+	renderFavorites,
+	renderAuthors,
+} from "./controllers.js";
 import { navItems, list, listTitle, bookCount } from "./domElements.js";
 
 // toggle theme
@@ -83,6 +90,9 @@ function renderList(e) {
 			list.innerHTML = haveReadBooks;
 			break;
 		case "renderAuthors":
+			const { authorsList, authorsCount } = renderAuthors();
+			bookCount.textContent = `${authorsCount}`;
+			list.innerHTML = authorsList;
 			break;
 		case "renderDeleted":
 			break;

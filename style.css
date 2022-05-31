@@ -326,10 +326,14 @@ body {
 	opacity: 0.6;
 	align-self: center;
 }
-.author-name {
+.authors-list > .author-name {
 	color: var(--main-text-color);
 	border-bottom: 1px solid var(--body-color);
 	padding: var(--small-space);
+}
+.number-of-author-books-in-list {
+	font-size: var(--thin-font);
+	opacity: 0.5;
 }
 
 /*  */

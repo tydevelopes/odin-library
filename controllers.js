@@ -12,7 +12,30 @@ export const getReadingNow = () => {};
 export const getToRead = () => {};
 export const getHaveRead = () => {};
 export const getFavorites = () => {};
-export const getAuthors = () => {};
+export const getAuthors = () => {
+	const authorBookCount = {};
+	getBooks()
+		.map(({ author }) => author)
+		.flat()
+		.map(author => {
+			if (authorBookCount.hasOwnProperty(author)) {
+				authorBookCount[author] += 1;
+			} else {
+				authorBookCount[author] = 1;
+			}
+		});
+
+	/**
+	 * convert authorBookCount to array of objects - format : [{name: author, booksWritten : count}] and return
+	 * key is author
+	 */
+	return Object.keys(authorBookCount).map(key => {
+		return {
+			name: key,
+			booksWritten: authorBookCount[key],
+		};
+	});
+};
 export const getBooksByAuthor = name => {};
 export const getDeletedBooks = () => {};
 
@@ -111,7 +134,28 @@ export const renderFavorites = () => {
 //   return renderBooks(books);
 // }
 
-export const renderAuthors = authors => {};
+/**
+ * get all books - returns array of books
+ * then go through each book at get the author array - returns array of authors array
+ * then flatten the array - returns an array
+ * them go through the authors and count books written
+ */
+export const renderAuthors = () => {
+	const authorsAndBookCount = getAuthors();
+
+	return {
+		authorsList: authorsAndBookCount
+			.map(({ name, booksWritten }) => {
+				return `<li class="author-list-item-container">
+			<span class="material-icons">person</span>
+			<span class="author-name">${name}</span>
+			<span class="number-of-author-books-in-list">${booksWritten}</span>
+		</li>`;
+			})
+			.join(""),
+		authorsCount: authorsAndBookCount.length,
+	};
+};
 export const renderBooksByAuthor = books => {};
 export const renderDeletedBooks = books => {};
 
