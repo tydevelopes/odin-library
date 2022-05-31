@@ -1,4 +1,4 @@
-import { renderAllBooks } from "./controllers.js";
+import { renderAllBooks, renderReadingNow, renderToRead, renderHaveRead, renderFavorites } from "./controllers.js";
 import { navItems, list, listTitle } from "./domElements.js";
 
 // toggle theme
@@ -59,15 +59,19 @@ function renderList(e) {
 	console.log(e.currentTarget);
 	switch (e.currentTarget.dataset.action) {
 		case "renderReadingNow":
+			list.innerHTML = renderReadingNow();
 			break;
 		case "renderAllBooks":
 			list.innerHTML = renderAllBooks();
 			break;
 		case "renderFavorites":
+			list.innerHTML = renderFavorites();
 			break;
 		case "renderToRead":
+			list.innerHTML = renderToRead();
 			break;
 		case "renderHaveRead":
+			list.innerHTML = renderHaveRead();
 			break;
 		case "renderAuthors":
 			break;

@@ -4,11 +4,11 @@
 
 - [x] Save generated booklist to local storage
 - [ ] Write logic to load list when a menu item is clicked
-  - [ ] reading now
-  - [ ] all books
-  - [ ] favorites
-  - [ ] to read
-  - [ ] have read
+  - [x] reading now
+  - [x] all books
+  - [x] favorites
+  - [x] to read
+  - [x] have read
   - [ ] authors
   - [ ] trash
 - [ ] On page load, render now reading

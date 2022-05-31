@@ -21,6 +21,7 @@ const renderBooks = books => {
 	return books
 		.map(book => {
 			const { id, title, author, pages, pagesRead, favorite, toRead, haveRead, nowReading } = book;
+			let currentPagePosition = (pagesRead / pages) * 100;
 			return `<li class="book-list-item-container" data-id="${id}">
 			<div class="image-container"></div>
 			<div class="info">
@@ -30,7 +31,7 @@ const renderBooks = books => {
 				<div class="timeline">
 					<div class="material-icons line">
 						<span class="material-icons point start-page">fiber_manual_record</span>
-						<span class="material-icons point current-page">fiber_manual_record</span>
+						<span class="material-icons point current-page" style="left:${currentPagePosition}%">fiber_manual_record</span>
 						<span class="material-icons point end-page">fiber_manual_record</span>
 					</div>
 				</div>
@@ -47,14 +48,54 @@ const renderBooks = books => {
 		})
 		.join("");
 };
+// const filterBy = param => {
+
+// }
 export const renderAllBooks = () => {
 	const books = getBooks();
 	return renderBooks(books);
 };
-export const renderReadingNow = books => {};
-export const renderToRead = books => {};
-export const renderHaveRead = books => {};
-export const renderFavorites = books => {};
+export const renderReadingNow = () => {
+	// get all books with nowwReading set to true
+	let books = getBooks().filter(({ nowReading }) => nowReading);
+	return renderBooks(books);
+};
+export const renderToRead = () => {
+	// get all books with toRead set to true
+	let books = getBooks().filter(({ toRead }) => toRead);
+	return renderBooks(books);
+};
+export const renderHaveRead = () => {
+	// get all books with haveRead set to true
+	let books = getBooks().filter(({ haveRead }) => haveRead);
+	return renderBooks(books);
+};
+export const renderFavorites = () => {
+	// get all books with favorites set to true
+	let books = getBooks().filter(({ favorite }) => favorite);
+	return renderBooks(books);
+};
+
+// TODO :- combine book fitering function to renderBooksByFilter function
+// const renderBooksByFilter = filter => {
+//   let books = getBooks().filter((book) => {
+//     if ( filter = "renderReadingNow"){
+//       return book.nowReading
+//     }
+//     if (filter = "renderFavorites"){
+//       return book.favorite
+//     }
+//     if ((filter = "renderToRead")) {
+//       return book.toRead;
+// 		}
+//     if ((filter = "renderHaveRead")) {
+//       return book.haveRead;
+// 		}
+//     return book
+//   });
+//   return renderBooks(books);
+// }
+
 export const renderAuthors = authors => {};
 export const renderBooksByAuthor = books => {};
 export const renderDeletedBooks = books => {};
