@@ -94,7 +94,10 @@ function renderList(e) {
 	e.currentTarget.classList.add("active");
 	const text = e.currentTarget.children[1].textContent;
 	listTitle.textContent = text;
+
+	closeNav();
 }
+
 function removeAllActiveClass() {
 	navItems.forEach(navItem => {
 		navItem.classList.remove("active");
