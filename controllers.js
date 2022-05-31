@@ -27,7 +27,7 @@ const renderBooks = books => {
 			<div class="info">
 				<div class="book-title">${title}</div>
 				<div class="authors-name">${author.join(",")}</div>
-				<div class="pages">${pages}</div>
+				<div class="pages">p.${pages}</div>
 				<div class="timeline">
 					<div class="material-icons line">
 						<span class="material-icons point start-page">fiber_manual_record</span>
@@ -53,27 +53,42 @@ const renderBooks = books => {
 // }
 export const renderAllBooks = () => {
 	const books = getBooks();
-	return renderBooks(books);
+	return {
+		booksList: renderBooks(books),
+		count: books.length,
+	};
 };
 export const renderReadingNow = () => {
 	// get all books with nowwReading set to true
 	let books = getBooks().filter(({ nowReading }) => nowReading);
-	return renderBooks(books);
+	return {
+		booksList: renderBooks(books),
+		count: books.length,
+	};
 };
 export const renderToRead = () => {
 	// get all books with toRead set to true
 	let books = getBooks().filter(({ toRead }) => toRead);
-	return renderBooks(books);
+	return {
+		booksList: renderBooks(books),
+		count: books.length,
+	};
 };
 export const renderHaveRead = () => {
 	// get all books with haveRead set to true
 	let books = getBooks().filter(({ haveRead }) => haveRead);
-	return renderBooks(books);
+	return {
+		booksList: renderBooks(books),
+		count: books.length,
+	};
 };
 export const renderFavorites = () => {
 	// get all books with favorites set to true
 	let books = getBooks().filter(({ favorite }) => favorite);
-	return renderBooks(books);
+	return {
+		booksList: renderBooks(books),
+		count: books.length,
+	};
 };
 
 // TODO :- combine book fitering function to renderBooksByFilter function

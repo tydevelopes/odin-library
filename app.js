@@ -1,5 +1,5 @@
 import { renderAllBooks, renderReadingNow, renderToRead, renderHaveRead, renderFavorites } from "./controllers.js";
-import { navItems, list, listTitle } from "./domElements.js";
+import { navItems, list, listTitle, bookCount } from "./domElements.js";
 
 // toggle theme
 const toggleThemeEl = document.querySelector(".toggle-theme");
@@ -56,22 +56,31 @@ navItems.forEach(navItem => {
 
 // Event handlers
 function renderList(e) {
-	console.log(e.currentTarget);
 	switch (e.currentTarget.dataset.action) {
 		case "renderReadingNow":
-			list.innerHTML = renderReadingNow();
+			const { booksList: nowReadingBooks, count: nowReadingCount } = renderReadingNow();
+			bookCount.textContent = `${nowReadingCount}`;
+			list.innerHTML = nowReadingBooks;
 			break;
 		case "renderAllBooks":
-			list.innerHTML = renderAllBooks();
+			const { booksList: allBooks, count: allBookscount } = renderAllBooks();
+			bookCount.textContent = `${allBookscount}`;
+			list.innerHTML = allBooks;
 			break;
 		case "renderFavorites":
-			list.innerHTML = renderFavorites();
+			const { booksList: favoriteBooks, count: favoriteCount } = renderFavorites();
+			bookCount.textContent = `${favoriteCount}`;
+			list.innerHTML = favoriteBooks;
 			break;
 		case "renderToRead":
-			list.innerHTML = renderToRead();
+			const { booksList: toReadBooks, count: toReadCount } = renderToRead();
+			bookCount.textContent = `${toReadCount}`;
+			list.innerHTML = toReadBooks;
 			break;
 		case "renderHaveRead":
-			list.innerHTML = renderHaveRead();
+			const { booksList: haveReadBooks, count: haveReadCount } = renderHaveRead();
+			bookCount.textContent = `${haveReadCount}`;
+			list.innerHTML = haveReadBooks;
 			break;
 		case "renderAuthors":
 			break;
@@ -100,6 +109,9 @@ window.addEventListener("DOMContentLoaded", () => {
 	} else {
 		root.className = "light";
 	}
+	const { booksList: books, count } = renderReadingNow();
+	bookCount.textContent = `${count}`;
+	list.innerHTML = books;
 });
 
 // Save books to local storage

@@ -107,8 +107,10 @@ body {
 	align-items: center;
 	gap: var(--medium-space);
 }
-.list-title {
+.book-count {
 	margin-right: auto;
+	color: var(--golden-light);
+	font: var(--thin-font);
 }
 .active {
 	color: var(--golden);
