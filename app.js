@@ -7,6 +7,7 @@ import {
 	renderAuthors,
 } from "./controllers.js";
 import { navItems, list, listTitle, bookCount } from "./domElements.js";
+import { books } from "./bookListGenerator/books.js";
 
 // toggle theme
 const toggleThemeEl = document.querySelector(".toggle-theme");
@@ -128,9 +129,10 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 // Save books to local storage
-// import { books } from "./bookListGenerator/books.js";
-// const saveToLocalStorage = () => {
-// 	localStorage.setItem("books", JSON.stringify(books));
-// };
+const saveToLocalStorage = () => {
+	if (!localStorage.getItem("books")) {
+		localStorage.setItem("books", JSON.stringify(books));
+	}
+};
 
-// saveToLocalStorage();
+saveToLocalStorage();
