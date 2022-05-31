@@ -168,6 +168,7 @@ export const renderBooksByAuthor = name => {
 	return {
 		booksList: renderBooks(books),
 		count: books.length,
+		name,
 	};
 };
 export const renderDeletedBooks = books => {};

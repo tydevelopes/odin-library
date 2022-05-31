@@ -98,8 +98,9 @@ function renderList(e) {
 			const authorListItem = document.querySelectorAll(".author-list-item-container");
 			authorListItem.forEach(el => {
 				el.addEventListener("click", e => {
-					const { booksList, count } = renderBooksByAuthor(e.currentTarget.dataset.author);
+					const { booksList, count, name } = renderBooksByAuthor(e.currentTarget.dataset.author);
 					bookCount.textContent = `${count}`;
+					listTitle.innerHTML = `<span>Author - </span><span class="author-name">${name}</span>`;
 					list.innerHTML = booksList;
 				});
 			});

@@ -107,6 +107,16 @@ body {
 	align-items: center;
 	gap: var(--medium-space);
 }
+.list-title {
+	display: flex;
+	font: var(--small-font);
+	align-items: center;
+	gap: var(--thin-space);
+}
+.list-title > .author-name {
+	font: var(--thin-font);
+	opacity: 0.5;
+}
 .book-count {
 	margin-right: auto;
 	color: var(--golden-light);

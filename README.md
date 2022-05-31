@@ -16,7 +16,8 @@
 - [ ] add count of rendered deleted books
 - [x] close nav when menu item is clicked
 - [x] On page load, render now reading
-- [ ] Logic to render author's book written when an author is clicked
+- [x] Logic to render author's book written when an author is clicked
+- [ ] Add back button to when author books are render. button when clicked will render autor list
 - [ ] Write functions to execute when an action icon on a book is clicked
   - [ ] favorite
   - [ ] toRead
