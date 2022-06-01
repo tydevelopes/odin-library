@@ -348,5 +348,8 @@ body {
 	font-size: var(--thin-font);
 	opacity: 0.5;
 }
+.restore-book {
+	color: var(--golden);
+}
 
 /*  */
