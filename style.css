@@ -59,6 +59,20 @@ body {
 	display: flex;
 	flex-direction: column;
 }
+.edit-add-container {
+	max-width: 2592px;
+	min-height: 100vh;
+	margin: auto;
+	background-color: var(--main-bg-color);
+	color: var(--main-text-color);
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 30;
+}
 .nav {
 	font: var(--medium-font);
 	background-color: rgba(0, 0, 0, 0);

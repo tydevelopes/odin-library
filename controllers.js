@@ -86,7 +86,6 @@ const renderBooks = books => {
 		})
 		.join("");
 };
-const addListener = () => {};
 export const renderAllBooks = () => {
 	const books = getBooks();
 	return {
@@ -185,11 +184,50 @@ export const renderDeletedBooks = () => {
 	};
 };
 
+// render Add/Edit container
+const renderEditAddContainer = book => {
+	let editing = book ? true : false;
+	const { title, author, pages, pagesRead } = book;
+
+	return `<!-- header start -->
+			<header class="header">
+				<span class="material-icons go-back">arrow_back</span>
+				<span class="session">${editing ? "EDIT" : "ADD"}</span>
+			</header>
+			<!-- header end -->
+
+			<!-- main start -->
+			<ul class="list input-list">
+				<li class="list-item" data-label=${title ? title : ""}>
+					<span class="list-item-input">${title ? title : "---"}</span>
+					<span class="list-item-description">Title</span>
+				</li> 
+				<li class="list-item" data-label=${author ? author.join(", ") : ""}>
+					<span class="list-item-input">${author ? author.join(", ") : "---"}</span>
+					<span class="list-item-description">Author</span>
+				</li>
+				<li class="list-item" data-label=${pages ? pages : ""}>
+					<span class="list-item-input">${pages ? pages : "---"}</span>
+					<span class="list-item-description">Pages</span>
+				</li>
+				<li class="list-item" data-label=${pagesRead ? pagesRead : ""}>
+					<span class="list-item-input">${pagesRead ? pagesRead : "---"}</span>
+					<span class="list-item-description">Pages Read</span>
+				</li>
+			</ul>
+			<!-- main end -->`;
+};
+
 //  functions to perform actions on a single books
 export const moveToTrash = bookID => {};
 export const restoreDeletedBook = bookID => {};
 export const addBook = bookID => {};
-export const editBook = bookID => {};
+
+export const editBook = bookID => {
+	const bookToEdit = getBooks().find(book => bookID === book.id);
+	return renderEditAddContainer(bookToEdit);
+};
+
 export const deleteBook = bookID => {
 	let deletedBook = null;
 	const books = getBooks().filter(book => {

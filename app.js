@@ -9,6 +9,7 @@ import {
 	toggle,
 	deleteBook,
 	renderDeletedBooks,
+	editBook,
 } from "./controllers.js";
 import { navItems, list, listTitle, bookCount, readingNow } from "./domElements.js";
 import { books } from "./bookListGenerator/books.js";
@@ -103,6 +104,19 @@ list.addEventListener("click", e => {
 				renderList(renderedList.dataset.action);
 				break;
 			case "edit":
+				// create a container, put html inside and append to body
+				const container = document.createElement("div");
+				container.classList.add("edit-add-container");
+				container.innerHTML = editBook(bookId);
+				document.body.append(container);
+				document.body.style.overflow = "hidden";
+				// Get a reference to the back arrow and add a click event to it
+				const goBack = document.querySelector(".go-back");
+				goBack.addEventListener("click", () => {
+					renderList(renderedList.dataset.action);
+					document.body.removeChild(container);
+					document.body.style.overflow = "";
+				});
 				break;
 
 			default:
