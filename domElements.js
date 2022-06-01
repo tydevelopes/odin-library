@@ -10,3 +10,4 @@ export const navItems = document.querySelectorAll(".nav-content > div:not(:first
 export const listTitle = document.querySelector(".list-title");
 export const list = document.querySelector(".list");
 export const bookCount = document.querySelector(".book-count");
+export const readingNow = document.querySelector(".reading-now");

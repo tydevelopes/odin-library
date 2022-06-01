@@ -6,8 +6,9 @@ import {
 	renderFavorites,
 	renderAuthors,
 	renderBooksByAuthor,
+	toggle,
 } from "./controllers.js";
-import { navItems, list, listTitle, bookCount } from "./domElements.js";
+import { navItems, list, listTitle, bookCount, readingNow } from "./domElements.js";
 import { books } from "./bookListGenerator/books.js";
 
 // toggle theme
@@ -59,12 +60,56 @@ navContentEl.addEventListener("click", e => {
 
 // Add  Click Event Listeners to menu items except the first one
 navItems.forEach(navItem => {
-	navItem.addEventListener("click", renderList);
+	navItem.addEventListener("click", e => {
+		renderList(e.currentTarget.dataset.action);
+		removeAllActiveClass();
+		// Grab text, change item color and place into header title
+		e.currentTarget.classList.add("active");
+		const text = e.currentTarget.children[1].textContent;
+		listTitle.textContent = text;
+
+		closeNav();
+	});
+});
+
+// Add click event to list
+list.addEventListener("click", e => {
+	// console.log(e.target.parentElement.parentElement.parentElement.dataset.id);
+	// console.log(Array.from(e.target.parentElement.classList));
+	if (Array.from(e.target.parentElement.classList).includes("action-icons")) {
+		// change icon color of toggleable icons when clicked
+		// toggleable returns a string
+		if (e.target.dataset.toggleable === "true") {
+			e.target.classList.toggle("active");
+		}
+		//  Get book ID
+		const bookId = e.target.parentElement.parentElement.parentElement.dataset.id;
+		// perform an action based on an action icon clicked
+		// when a change is made, rerender active menu
+		switch (e.target.dataset.action) {
+			case "favorite":
+			case "nowReading":
+			case "toRead":
+			case "haveRead":
+				toggle(bookId, e.target.dataset.action);
+				const renderedList = document.querySelector(".nav-content > .active");
+				// console.log(renderedList.dataset.action);
+				renderList(renderedList.dataset.action);
+				break;
+			case "delete":
+				break;
+			case "edit":
+				break;
+
+			default:
+				break;
+		}
+	}
 });
 
 // Nav Items Event handlers
-function renderList(e) {
-	switch (e.currentTarget.dataset.action) {
+function renderList(action) {
+	switch (action) {
 		case "renderReadingNow":
 			const { booksList: nowReadingBooks, count: nowReadingCount } = renderReadingNow();
 			bookCount.textContent = `${nowReadingCount}`;
@@ -110,13 +155,6 @@ function renderList(e) {
 		default:
 			break;
 	}
-	removeAllActiveClass();
-	// Grab text, change item color and place into header title
-	e.currentTarget.classList.add("active");
-	const text = e.currentTarget.children[1].textContent;
-	listTitle.textContent = text;
-
-	closeNav();
 }
 
 function removeAllActiveClass() {
@@ -136,6 +174,7 @@ window.addEventListener("DOMContentLoaded", () => {
 	const { booksList: books, count } = renderReadingNow();
 	bookCount.textContent = `${count}`;
 	list.innerHTML = books;
+	readingNow.classList.add("active");
 });
 
 // Save books to local storage

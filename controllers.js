@@ -66,21 +66,23 @@ const renderBooks = books => {
 					</div>
 				</div>
 				<div class="action-icons">
-					<span class="material-icons ${favorite ? "active" : ""}" data-action="favorite">star_border</span>
-					<span class="material-icons  ${nowReading ? "active" : ""}" data-action="nowReading">repeat</span>
-					<span class="material-icons  ${toRead ? "active" : ""}" data-action="toRead">schedule</span>
-					<span class="material-icons  ${haveRead ? "active" : ""}" data-action="haveRead">done_all</span>
-					<span class="material-icons" data-action="delete">delete_outline</span>
-					<span class="material-icons" data-action="edit">edit</span>
+					<span class="material-icons ${
+						favorite ? "active" : ""
+					}" data-action="favorite" data-toggleable="true">star_border</span>
+					<span class="material-icons  ${
+						nowReading ? "active" : ""
+					}" data-action="nowReading" data-toggleable="true">repeat</span>
+					<span class="material-icons  ${toRead ? "active" : ""}" data-action="toRead" data-toggleable="true">schedule</span>
+					<span class="material-icons  ${haveRead ? "active" : ""}" data-action="haveRead" data-toggleable="true">done_all</span>
+					<span class="material-icons" data-action="delete" data-toggleable="false">delete_outline</span>
+					<span class="material-icons" data-action="edit" data-toggleable="false">edit</span>
 				</div>
 			</div>
 		</li>`;
 		})
 		.join("");
 };
-// const filterBy = param => {
-
-// }
+const addListener = () => {};
 export const renderAllBooks = () => {
 	const books = getBooks();
 	return {
@@ -179,7 +181,34 @@ export const restoreDeletedBook = bookID => {};
 export const addBook = bookID => {};
 export const editBook = bookID => {};
 export const deleteBook = bookID => {};
-const toggleFavorites = bookID => {};
-export const toggleToRead = bookID => {};
-export const toggleHaveRead = bookID => {};
-export const toggleReadingNow = bookID => {};
+// export const toggleFavorites = bookID => {
+//   const books = getBooks().map(book => {
+//     if(bookID === book.id){
+//       return {...book, favorite: !book.favorite}
+//     }
+//     return book;
+//   })
+//   saveBooks(book);
+// };
+// export const toggleToRead = bookID => {
+//   const books = getBooks().map(book => {
+// 		if (bookID === book.id) {
+// 			return { ...book, toRead: !book.toRead };
+// 		}
+// 		return book;
+// 	});
+// 	saveBooks(book);
+// };
+// export const toggleHaveRead = bookID => {};
+// export const toggleReadingNow = bookID => {};
+
+export const toggle = (bookID, key) => {
+	const books = getBooks().map(book => {
+		if (bookID === book.id) {
+			console.log({ ...book, [key]: !book[key] });
+			return { ...book, [key]: !book[key] };
+		}
+		return book;
+	});
+	saveBooks(books);
+};
