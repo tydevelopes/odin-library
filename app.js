@@ -87,6 +87,7 @@ list.addEventListener("click", e => {
 		}
 		//  Get book ID
 		const bookId = e.target.parentElement.parentElement.parentElement.dataset.id;
+		const book = e.target.parentElement.parentElement.parentElement;
 		const renderedList = document.querySelector(".nav-content > .active");
 		// perform an action based on an action icon clicked
 		// when a change is made, rerender active menu
@@ -109,6 +110,7 @@ list.addEventListener("click", e => {
 				container.classList.add("edit-add-container");
 				container.innerHTML = editBook(bookId);
 				document.body.append(container);
+				scrollTo(0, 0);
 				document.body.style.overflow = "hidden";
 				// Get a reference to the back arrow and add a click event to it
 				const goBack = document.querySelector(".go-back");
@@ -116,7 +118,16 @@ list.addEventListener("click", e => {
 					renderList(renderedList.dataset.action);
 					document.body.removeChild(container);
 					document.body.style.overflow = "";
+					// scroll to book that was edited
+					document.querySelector(`li[data-id='${bookId}']`).scrollIntoView();
+
+					/**
+					 * TODO:-
+					 * save edited book
+					 */
 				});
+
+				// open input modal when list input item is clicked
 				break;
 
 			default:

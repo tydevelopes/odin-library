@@ -61,7 +61,8 @@ body {
 }
 .edit-add-container {
 	max-width: 2592px;
-	min-height: 100vh;
+	/* min-height: 100vh; */
+	height: 100%;
 	margin: auto;
 	background-color: var(--main-bg-color);
 	color: var(--main-text-color);
@@ -70,6 +71,7 @@ body {
 	position: absolute;
 	top: 0;
 	left: 0;
+	bottom: 0;
 	width: 100%;
 	z-index: 30;
 }
@@ -305,6 +307,7 @@ body {
 	align-items: center;
 	padding: var(--medium-space);
 	/* display: none; */
+	z-index: 50;
 }
 .input-modal-content,
 .authors-modal-content {

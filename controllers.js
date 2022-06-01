@@ -198,19 +198,19 @@ const renderEditAddContainer = book => {
 
 			<!-- main start -->
 			<ul class="list input-list">
-				<li class="list-item" data-label=${title ? title : ""}>
+				<li class="list-item" data-inputLabel='Title' data-inputValue=${title ? title : ""}>
 					<span class="list-item-input">${title ? title : "---"}</span>
 					<span class="list-item-description">Title</span>
 				</li> 
-				<li class="list-item" data-label=${author ? author.join(", ") : ""}>
+				<li class="list-item" data-inputLabel='Authors' data-inputValue=${author ? author.join(", ") : ""}>
 					<span class="list-item-input">${author ? author.join(", ") : "---"}</span>
-					<span class="list-item-description">Author</span>
+					<span class="list-item-description">Authors</span>
 				</li>
-				<li class="list-item" data-label=${pages ? pages : ""}>
+				<li class="list-item" data-inputLabel='Pages' data-inputValue=${pages ? pages : ""}>
 					<span class="list-item-input">${pages ? pages : "---"}</span>
 					<span class="list-item-description">Pages</span>
 				</li>
-				<li class="list-item" data-label=${pagesRead ? pagesRead : ""}>
+				<li class="list-item" data-inputLabel='Pages Read' data-inputValue=${pagesRead ? pagesRead : ""}>
 					<span class="list-item-input">${pagesRead ? pagesRead : "---"}</span>
 					<span class="list-item-description">Pages Read</span>
 				</li>
@@ -219,7 +219,6 @@ const renderEditAddContainer = book => {
 };
 
 //  functions to perform actions on a single books
-export const moveToTrash = bookID => {};
 export const restoreDeletedBook = bookID => {};
 export const addBook = bookID => {};
 
@@ -227,6 +226,8 @@ export const editBook = bookID => {
 	const bookToEdit = getBooks().find(book => bookID === book.id);
 	return renderEditAddContainer(bookToEdit);
 };
+
+export const renderInputModal = () => {};
 
 export const deleteBook = bookID => {
 	let deletedBook = null;
