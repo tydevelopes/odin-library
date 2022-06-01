@@ -160,7 +160,7 @@ function renderList(action) {
 			list.innerHTML = deletedBooks;
 			// grab each list and replace all action icons with RESTORE
 			document.querySelectorAll(".action-icons").forEach(el => {
-				el.innerHTML = `<span>RESTORE</span>`;
+				el.innerHTML = `<span class="restore-book" data-action="restore-book">RESTORE</span>`;
 			});
 			break;
 		default:
