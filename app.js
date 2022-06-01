@@ -158,6 +158,10 @@ function renderList(action) {
 			const { booksList: deletedBooks, count: deletedCount } = renderDeletedBooks();
 			bookCount.textContent = `${deletedCount}`;
 			list.innerHTML = deletedBooks;
+			// grab each list and replace all action icons with RESTORE
+			document.querySelectorAll(".action-icons").forEach(el => {
+				el.innerHTML = `<span>RESTORE</span>`;
+			});
 			break;
 		default:
 			break;
