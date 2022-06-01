@@ -61,7 +61,7 @@ const renderBooks = books => {
 			<div class="info">
 				<div class="book-title">${title}</div>
 				<div class="authors-name">${author.join(",")}</div>
-				<div class="pages">p.${pages}</div>
+				<div class="pages">Read ${pagesRead} of ${pages}</div>
 				<div class="timeline">
 					<div class="material-icons line">
 						<span class="material-icons point start-page">fiber_manual_record</span>
