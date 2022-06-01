@@ -7,6 +7,8 @@ import {
 	renderAuthors,
 	renderBooksByAuthor,
 	toggle,
+	deleteBook,
+	renderDeletedBooks,
 } from "./controllers.js";
 import { navItems, list, listTitle, bookCount, readingNow } from "./domElements.js";
 import { books } from "./bookListGenerator/books.js";
@@ -84,6 +86,7 @@ list.addEventListener("click", e => {
 		}
 		//  Get book ID
 		const bookId = e.target.parentElement.parentElement.parentElement.dataset.id;
+		const renderedList = document.querySelector(".nav-content > .active");
 		// perform an action based on an action icon clicked
 		// when a change is made, rerender active menu
 		switch (e.target.dataset.action) {
@@ -92,11 +95,12 @@ list.addEventListener("click", e => {
 			case "toRead":
 			case "haveRead":
 				toggle(bookId, e.target.dataset.action);
-				const renderedList = document.querySelector(".nav-content > .active");
 				// console.log(renderedList.dataset.action);
 				renderList(renderedList.dataset.action);
 				break;
 			case "delete":
+				deleteBook(bookId);
+				renderList(renderedList.dataset.action);
 				break;
 			case "edit":
 				break;
@@ -151,6 +155,9 @@ function renderList(action) {
 			});
 			break;
 		case "renderDeleted":
+			const { booksList: deletedBooks, count: deletedCount } = renderDeletedBooks();
+			bookCount.textContent = `${deletedCount}`;
+			list.innerHTML = deletedBooks;
 			break;
 		default:
 			break;

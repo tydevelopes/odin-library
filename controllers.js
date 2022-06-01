@@ -2,9 +2,14 @@
 export const saveBooks = books => {
 	localStorage.setItem("books", JSON.stringify(books));
 };
-export const saveDeletedBooks = () => {};
+export const saveDeletedBooks = books => {
+	localStorage.setItem("trash", JSON.stringify(books));
+};
 
 // functions to filter books
+export const getDeletedBooks = () => {
+	return JSON.parse(localStorage.getItem("trash"));
+};
 export const getBooks = () => {
 	return JSON.parse(localStorage.getItem("books"));
 };
@@ -44,7 +49,6 @@ export const getBooksByAuthor = name => {
 	 */
 	return getBooks().filter(book => book.author.includes(name));
 };
-export const getDeletedBooks = () => {};
 
 //  functions to render contents to screen
 const renderBooks = books => {
@@ -173,14 +177,39 @@ export const renderBooksByAuthor = name => {
 		name,
 	};
 };
-export const renderDeletedBooks = books => {};
+export const renderDeletedBooks = () => {
+	const books = getDeletedBooks();
+	return {
+		booksList: renderBooks(books),
+		count: books.length,
+	};
+};
 
 //  functions to perform actions on a single books
 export const moveToTrash = bookID => {};
 export const restoreDeletedBook = bookID => {};
 export const addBook = bookID => {};
 export const editBook = bookID => {};
-export const deleteBook = bookID => {};
+export const deleteBook = bookID => {
+	let deletedBook = null;
+	const books = getBooks().filter(book => {
+		if (bookID === book.id) {
+			deletedBook = { ...book };
+			return false;
+		} else {
+			return true;
+		}
+	});
+	saveBooks(books);
+
+	let trash = getDeletedBooks();
+	if (trash) {
+		trash.push(deletedBook);
+	} else {
+		trash = [deletedBook];
+	}
+	saveDeletedBooks(trash);
+};
 // export const toggleFavorites = bookID => {
 //   const books = getBooks().map(book => {
 //     if(bookID === book.id){
