@@ -280,6 +280,7 @@ document.querySelector(".add").addEventListener("click", () => {
 		addBook({ ...newBook });
 		// rerender all books
 		renderList("renderAllBooks");
+		removeAllActiveClass();
 		allBooks.classList.add("active");
 		const text = allBooks.children[1].textContent;
 		listTitle.textContent = text;
@@ -338,7 +339,6 @@ window.addEventListener("DOMContentLoaded", () => {
 	const { booksList: books, count } = renderReadingNow();
 	bookCount.textContent = `${count}`;
 	list.innerHTML = books;
-	removeAllActiveClass();
 	readingNow.classList.add("active");
 });
 
