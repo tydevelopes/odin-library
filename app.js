@@ -125,7 +125,10 @@ list.addEventListener("click", e => {
 					const editedBook = {
 						id: bookId,
 						title: list.querySelector('li[data-inputlabel="Title"').dataset.inputvalue,
-						author: list.querySelector('li[data-inputlabel="Authors"').dataset.inputvalue.split(", "),
+						author: list
+							.querySelector('li[data-inputlabel="Authors"')
+							.dataset.inputvalue.split(",")
+							.map(name => name.trim()),
 						pages: list.querySelector('li[data-inputlabel="Pages"').dataset.inputvalue,
 						pagesRead: list.querySelector('li[data-inputlabel="Pages Read"').dataset.inputvalue,
 					};
@@ -267,7 +270,10 @@ document.querySelector(".add").addEventListener("click", () => {
 		const newBook = {
 			id: uuidv4(),
 			title: list.querySelector('li[data-inputlabel="Title"').dataset.inputvalue,
-			author: list.querySelector('li[data-inputlabel="Authors"').dataset.inputvalue.split(", "),
+			author: list
+				.querySelector('li[data-inputlabel="Authors"')
+				.dataset.inputvalue.split(",")
+				.map(name => name.trim()),
 			pages: list.querySelector('li[data-inputlabel="Pages"').dataset.inputvalue,
 			pagesRead: list.querySelector('li[data-inputlabel="Pages Read"').dataset.inputvalue,
 			favorite: false,
@@ -328,6 +334,7 @@ document.querySelector(".add").addEventListener("click", () => {
 	});
 });
 
+let docHeight;
 // store user selected theme in localStorage
 window.addEventListener("DOMContentLoaded", () => {
 	const theme = localStorage.getItem("theme");
@@ -340,6 +347,16 @@ window.addEventListener("DOMContentLoaded", () => {
 	bookCount.textContent = `${count}`;
 	list.innerHTML = books;
 	readingNow.classList.add("active");
+
+	// To reliably obtain the full document height, we should take the maximum of these properties:
+	docHeight = Math.max(
+		document.body.scrollHeight,
+		document.documentElement.scrollHeight,
+		document.body.offsetHeight,
+		document.documentElement.offsetHeight,
+		document.body.clientHeight,
+		document.documentElement.clientHeight
+	);
 });
 
 // Save books to local storage
@@ -350,3 +367,48 @@ const saveToLocalStorage = () => {
 };
 
 saveToLocalStorage();
+
+let oldScrollPosition = scrollY;
+let scrollDirection = null;
+
+const navigate = document.querySelector(".navigate");
+const navicateIcon = document.querySelector(".navigate-icon");
+
+navigate.addEventListener("click", () => {
+	if (scrollDirection === "down") {
+		// Scroll to bottom of page
+		scrollTo(0, docHeight);
+		return;
+	}
+	// Scroll to top of page
+	if (scrollDirection === "up") {
+		scrollTo(0, 0);
+		return;
+	}
+});
+
+window.addEventListener("scroll", () => {
+	console.dir(docHeight);
+	// show down arrow if scrolling down
+	if (scrollY > oldScrollPosition) {
+		oldScrollPosition = scrollY;
+		scrollDirection = "down";
+		if (scrollY < 100 || scrollY > docHeight - 1000) {
+			navigate.style.display = "";
+		} else {
+			navigate.style.display = "inline-grid";
+		}
+		navicateIcon.textContent = "arrow_downward";
+	}
+	// show up arrow if scrolling up
+	if (scrollY < oldScrollPosition) {
+		oldScrollPosition = scrollY;
+		scrollDirection = "up";
+		if (scrollY > docHeight - 100 || scrollY < 639) {
+			navigate.style.display = "";
+		} else {
+			navigate.style.display = "inline-grid";
+		}
+		navicateIcon.textContent = "arrow_upward";
+	}
+});

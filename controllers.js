@@ -60,7 +60,7 @@ const renderBooks = books => {
 			<div class="image-container"></div>
 			<div class="info">
 				<div class="book-title">${title}</div>
-				<div class="authors-name">${author.join(",")}</div>
+				<div class="authors-name">${author.join(", ")}</div>
 				<div class="pages">Read ${pagesRead} of ${pages}</div>
 				<div class="timeline">
 					<div class="material-icons line">
