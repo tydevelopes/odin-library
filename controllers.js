@@ -198,19 +198,19 @@ const renderEditAddContainer = book => {
 
 			<!-- main start -->
 			<ul class="list input-list">
-				<li class="list-item" data-inputLabel='Title' data-inputValue=${title ? title : ""}>
+				<li class="list-item" data-inputLabel="Title" data-inputValue="${title ? title : ""}">
 					<span class="list-item-input">${title ? title : "---"}</span>
 					<span class="list-item-description">Title</span>
 				</li> 
-				<li class="list-item" data-inputLabel='Authors' data-inputValue=${author ? author.join(", ") : ""}>
+				<li class="list-item" data-inputLabel='Authors' data-inputValue="${author ? author.join(", ") : ""}">
 					<span class="list-item-input">${author ? author.join(", ") : "---"}</span>
 					<span class="list-item-description">Authors</span>
 				</li>
-				<li class="list-item" data-inputLabel='Pages' data-inputValue=${pages ? pages : ""}>
+				<li class="list-item" data-inputLabel="Pages" data-inputValue="${pages ? pages : ""}">
 					<span class="list-item-input">${pages ? pages : "---"}</span>
 					<span class="list-item-description">Pages</span>
 				</li>
-				<li class="list-item" data-inputLabel='Pages Read' data-inputValue=${pagesRead ? pagesRead : ""}>
+				<li class="list-item" data-inputLabel="Pages Read" data-inputValue="${pagesRead ? pagesRead : ""}">
 					<span class="list-item-input">${pagesRead ? pagesRead : "---"}</span>
 					<span class="list-item-description">Pages Read</span>
 				</li>
@@ -227,7 +227,16 @@ export const editBook = bookID => {
 	return renderEditAddContainer(bookToEdit);
 };
 
-export const renderInputModal = () => {};
+export const renderInputModal = ({ inputLabel, inputValue }) => {
+	return `	<div class="input-modal-content">
+				<div class="input-label">${inputLabel}</div>
+				<input type="text" class="input" value="${inputValue}"/>
+				<div class="buttons-container">
+					<button class="select-author">CHOOSE</button>
+					<button class="save">SAVE</button>
+				</div>
+			</div>`;
+};
 
 export const deleteBook = bookID => {
 	let deletedBook = null;

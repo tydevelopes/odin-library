@@ -10,6 +10,7 @@ import {
 	deleteBook,
 	renderDeletedBooks,
 	editBook,
+	renderInputModal,
 } from "./controllers.js";
 import { navItems, list, listTitle, bookCount, readingNow } from "./domElements.js";
 import { books } from "./bookListGenerator/books.js";
@@ -127,7 +128,32 @@ list.addEventListener("click", e => {
 					 */
 				});
 
-				// open input modal when list input item is clicked
+				// open input modal when list input item is clicked and populate modal centent
+				document.querySelectorAll(".input-list > .list-item").forEach(item => {
+					item.addEventListener("click", e => {
+						console.log(e.currentTarget);
+						const input = {
+							inputLabel: e.currentTarget.dataset.inputlabel,
+							inputValue: e.currentTarget.dataset.inputvalue,
+						};
+						console.log(input);
+						// create a container, put html inside and append to body
+						const container = document.createElement("div");
+						container.classList.add("input-modal-container");
+						container.innerHTML = renderInputModal(input);
+						document.body.append(container);
+						// Prevent modal from closing when modal content area is clicked
+						document.querySelector(".input-modal-content").addEventListener("click", e => {
+							e.stopPropagation();
+						});
+						// Focus input
+						document.querySelector(".input-modal-content > input").focus();
+						// close modal when modal container is clicked
+						document.querySelector(".input-modal-container").addEventListener("click", e => {
+							e.currentTarget.remove();
+						});
+					});
+				});
 				break;
 
 			default:
