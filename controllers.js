@@ -185,9 +185,21 @@ export const renderDeletedBooks = () => {
 };
 
 // render Add/Edit container
-const renderEditAddContainer = book => {
-	let editing = book ? true : false;
-	const { title, author, pages, pagesRead } = book;
+export const renderEditAddContainer = book => {
+	console.log(book);
+	let editing = false;
+	let title = "";
+	let author = "";
+	let pages = "";
+	let pagesRead = "";
+
+	if (book) {
+		editing = true;
+		title = book.title;
+		author = book.author;
+		pages = book.pages;
+		pagesRead = book.pagesRead;
+	}
 
 	return `<!-- header start -->
 			<header class="header">
@@ -220,7 +232,15 @@ const renderEditAddContainer = book => {
 
 //  functions to perform actions on a single books
 export const restoreDeletedBook = bookID => {};
-export const addBook = bookID => {};
+/**
+ * WARNING!!! -
+ * dont use push to add the newbook, since it returns length of the new array
+ * Instead use concat which returns the new array
+ */
+export const addBook = book => {
+	const books = getBooks().concat(book);
+	saveBooks(books);
+};
 
 export const editBook = bookID => {
 	const bookToEdit = getBooks().find(book => bookID === book.id);

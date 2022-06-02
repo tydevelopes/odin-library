@@ -12,9 +12,12 @@ import {
 	editBook,
 	renderInputModal,
 	replaceBookInfo,
+	addBook,
+	renderEditAddContainer,
 } from "./controllers.js";
-import { navItems, list, listTitle, bookCount, readingNow } from "./domElements.js";
+import { navItems, list, listTitle, bookCount, readingNow, allBooks } from "./domElements.js";
 import { books } from "./bookListGenerator/books.js";
+import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 
 // toggle theme
 const toggleThemeEl = document.querySelector(".toggle-theme");
@@ -247,6 +250,82 @@ function removeAllActiveClass() {
 		navItem.classList.remove("active");
 	});
 }
+
+document.querySelector(".add").addEventListener("click", () => {
+	// create a container, put html inside and append to body
+	const container = document.createElement("div");
+	container.classList.add("edit-add-container");
+	container.innerHTML = renderEditAddContainer();
+	document.body.append(container);
+	scrollTo(0, 0);
+	document.body.style.overflow = "hidden";
+	// Get a reference to the back arrow and add a click event to it
+	const goBack = document.querySelector(".go-back");
+	goBack.addEventListener("click", () => {
+		//grab input items values, create an object
+		const list = document.querySelector(".input-list");
+		const newBook = {
+			id: uuidv4(),
+			title: list.querySelector('li[data-inputlabel="Title"').dataset.inputvalue,
+			author: list.querySelector('li[data-inputlabel="Authors"').dataset.inputvalue.split(", "),
+			pages: list.querySelector('li[data-inputlabel="Pages"').dataset.inputvalue,
+			pagesRead: list.querySelector('li[data-inputlabel="Pages Read"').dataset.inputvalue,
+			favorite: false,
+			toRead: false,
+			haveRead: false,
+			nowReading: false,
+		};
+		// save book to books in local storage
+		// Pass a copy of newNook
+		addBook({ ...newBook });
+		// rerender all books
+		renderList("renderAllBooks");
+		allBooks.classList.add("active");
+		const text = allBooks.children[1].textContent;
+		listTitle.textContent = text;
+
+		document.body.removeChild(container);
+		document.body.style.overflow = "";
+		// scroll to book that was edited
+		document.querySelector(`li[data-id='${newBook.id}']`).scrollIntoView();
+	});
+
+	// open input modal when list input item is clicked and populate modal centent
+	document.querySelectorAll(".input-list > .list-item").forEach(item => {
+		item.addEventListener("click", e => {
+			// console.log(e.currentTarget);
+			const inputListItem = e.currentTarget;
+			const input = {
+				inputLabel: e.currentTarget.dataset.inputlabel,
+				inputValue: e.currentTarget.dataset.inputvalue,
+			};
+			// console.log(input);
+			// create a container, put html inside and append to body
+			const container = document.createElement("div");
+			container.classList.add("input-modal-container");
+			container.innerHTML = renderInputModal(input);
+			document.body.append(container);
+			// Prevent modal from closing when modal content area is clicked
+			document.querySelector(".input-modal-content").addEventListener("click", e => {
+				e.stopPropagation();
+			});
+			// Focus input
+			document.querySelector(".input-modal-content > input").focus();
+			// close modal when modal container is clicked
+			document.querySelector(".input-modal-container").addEventListener("click", e => {
+				e.currentTarget.remove();
+			});
+			// Save input
+			document.querySelector(".save").addEventListener("click", () => {
+				const newValue = document.querySelector(".input-modal-content > input").value;
+				inputListItem.dataset.inputvalue = newValue;
+				inputListItem.children[0].textContent = newValue;
+				// close modal on save
+				document.querySelector(".input-modal-container").remove();
+			});
+		});
+	});
+});
 
 // store user selected theme in localStorage
 window.addEventListener("DOMContentLoaded", () => {
