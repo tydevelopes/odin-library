@@ -11,6 +11,7 @@ import {
 	renderDeletedBooks,
 	editBook,
 	renderInputModal,
+	replaceBookInfo,
 } from "./controllers.js";
 import { navItems, list, listTitle, bookCount, readingNow } from "./domElements.js";
 import { books } from "./bookListGenerator/books.js";
@@ -116,6 +117,19 @@ list.addEventListener("click", e => {
 				// Get a reference to the back arrow and add a click event to it
 				const goBack = document.querySelector(".go-back");
 				goBack.addEventListener("click", () => {
+					//grab input items values, create an object
+					const list = document.querySelector(".input-list");
+					const editedBook = {
+						id: bookId,
+						title: list.querySelector('li[data-inputlabel="Title"').dataset.inputvalue,
+						author: list.querySelector('li[data-inputlabel="Authors"').dataset.inputvalue.split(", "),
+						pages: list.querySelector('li[data-inputlabel="Pages"').dataset.inputvalue,
+						pagesRead: list.querySelector('li[data-inputlabel="Pages Read"').dataset.inputvalue,
+					};
+					console.log(editedBook);
+					// save book to books in local storage
+					replaceBookInfo(editedBook);
+					// rerender active menu
 					renderList(renderedList.dataset.action);
 					document.body.removeChild(container);
 					document.body.style.overflow = "";

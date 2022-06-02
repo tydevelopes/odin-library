@@ -289,3 +289,14 @@ export const toggle = (bookID, key) => {
 	});
 	saveBooks(books);
 };
+
+// replace old book info with new book info
+export const replaceBookInfo = newBookInfo => {
+	const books = getBooks().map(book => {
+		if (newBookInfo.id === book.id) {
+			return { ...book, ...newBookInfo };
+		}
+		return book;
+	});
+	saveBooks(books);
+};

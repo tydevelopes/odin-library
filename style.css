@@ -321,6 +321,9 @@ body {
 }
 .input-label {
 	align-self: center;
+	font: var(--thin-font);
+	color: var(--main-text-color);
+	opacity: 0.6;
 }
 .input {
 	border: none;
