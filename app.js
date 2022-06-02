@@ -131,12 +131,13 @@ list.addEventListener("click", e => {
 				// open input modal when list input item is clicked and populate modal centent
 				document.querySelectorAll(".input-list > .list-item").forEach(item => {
 					item.addEventListener("click", e => {
-						console.log(e.currentTarget);
+						// console.log(e.currentTarget);
+						const inputListItem = e.currentTarget;
 						const input = {
 							inputLabel: e.currentTarget.dataset.inputlabel,
 							inputValue: e.currentTarget.dataset.inputvalue,
 						};
-						console.log(input);
+						// console.log(input);
 						// create a container, put html inside and append to body
 						const container = document.createElement("div");
 						container.classList.add("input-modal-container");
@@ -151,6 +152,14 @@ list.addEventListener("click", e => {
 						// close modal when modal container is clicked
 						document.querySelector(".input-modal-container").addEventListener("click", e => {
 							e.currentTarget.remove();
+						});
+						// Save input
+						document.querySelector(".save").addEventListener("click", () => {
+							const newValue = document.querySelector(".input-modal-content > input").value;
+							inputListItem.dataset.inputvalue = newValue;
+							inputListItem.children[0].textContent = newValue;
+							// close modal on save
+							document.querySelector(".input-modal-container").remove();
 						});
 					});
 				});
