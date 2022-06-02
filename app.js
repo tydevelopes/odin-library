@@ -338,6 +338,7 @@ window.addEventListener("DOMContentLoaded", () => {
 	const { booksList: books, count } = renderReadingNow();
 	bookCount.textContent = `${count}`;
 	list.innerHTML = books;
+	removeAllActiveClass();
 	readingNow.classList.add("active");
 });
 
