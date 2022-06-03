@@ -238,8 +238,16 @@ export const restoreDeletedBook = bookID => {};
  * Instead use concat which returns the new array
  */
 export const addBook = book => {
-	const books = getBooks().concat(book);
+	let books = getBooks();
+	if (books) {
+		books.push(book);
+	} else {
+		books = [book];
+	}
 	saveBooks(books);
+	// saveDeletedBooks(trash);
+
+	// 	const books = getBooks().concat(book);
 };
 
 export const editBook = bookID => {
@@ -278,6 +286,7 @@ export const deleteBook = bookID => {
 	}
 	saveDeletedBooks(trash);
 };
+
 export const restoreFromTrash = bookID => {
 	let bookToRestore = null;
 	// get book and remove from trash
