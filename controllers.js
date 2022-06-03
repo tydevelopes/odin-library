@@ -278,6 +278,21 @@ export const deleteBook = bookID => {
 	}
 	saveDeletedBooks(trash);
 };
+export const restoreFromTrash = bookID => {
+	let bookToRestore = null;
+	// get book and remove from trash
+	const books = getDeletedBooks().filter(book => {
+		if (bookID === book.id) {
+			bookToRestore = { ...book };
+			return false;
+		} else {
+			return true;
+		}
+	});
+	saveDeletedBooks(books);
+	// restore book
+	addBook(bookToRestore);
+};
 // export const toggleFavorites = bookID => {
 //   const books = getBooks().map(book => {
 //     if(bookID === book.id){

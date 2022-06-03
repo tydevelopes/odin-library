@@ -15,6 +15,7 @@ import {
 	addBook,
 	renderEditAddContainer,
 	notify,
+	restoreFromTrash,
 } from "./controllers.js";
 import { navItems, list, listTitle, bookCount, readingNow, allBooks } from "./domElements.js";
 import { books } from "./bookListGenerator/books.js";
@@ -258,6 +259,15 @@ function renderList(action) {
 			// grab each list and replace all action icons with RESTORE
 			document.querySelectorAll(".action-icons").forEach(el => {
 				el.innerHTML = `<span class="restore-book" data-action="restore-book">RESTORE</span>`;
+
+				el.querySelector(".restore-book").addEventListener("click", () => {
+					const bookToRestoreId = el.parentElement.parentElement.dataset.id;
+					restoreFromTrash(bookToRestoreId);
+
+					const { booksList: deletedBooks, count: deletedCount } = renderDeletedBooks();
+					bookCount.textContent = `${deletedCount}`;
+					list.innerHTML = deletedBooks;
+				});
 			});
 			break;
 		default:
