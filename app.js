@@ -141,11 +141,6 @@ list.addEventListener("click", e => {
 					document.body.style.overflow = "";
 					// scroll to book that was edited
 					document.querySelector(`li[data-id='${bookId}']`).scrollIntoView();
-
-					/**
-					 * TODO:-
-					 * save edited book
-					 */
 				});
 
 				// open input modal when list input item is clicked and populate modal centent
@@ -175,11 +170,29 @@ list.addEventListener("click", e => {
 						});
 						// Save input
 						document.querySelector(".save").addEventListener("click", () => {
-							const newValue = document.querySelector(".input-modal-content > input").value;
-							inputListItem.dataset.inputvalue = newValue;
-							inputListItem.children[0].textContent = newValue;
-							// close modal on save
-							document.querySelector(".input-modal-container").remove();
+							// dont save empty string
+							let newValue = document.querySelector(".input-modal-content > input").value.trim();
+							if (inputListItem.dataset.inputlabel === "Pages" || inputListItem.dataset.inputlabel === "Pages Read") {
+								newValue = Number(newValue);
+								console.log(newValue);
+							}
+							if (inputListItem.dataset.inputlabel === "Pages Read") {
+								if (
+									newValue < 0 ||
+									newValue > Number(document.querySelector('li[data-inputlabel="Pages"').dataset.inputvalue)
+								) {
+									newValue = 0;
+								}
+							}
+							if (newValue) {
+								inputListItem.dataset.inputvalue = newValue;
+								inputListItem.children[0].textContent = newValue;
+								// close modal on save
+								document.querySelector(".input-modal-container").remove();
+							} else {
+								document.querySelector(".input-modal-content > input").focus();
+								document.querySelector(".input-modal-content > input").value = "";
+							}
 						});
 					});
 				});
@@ -324,11 +337,34 @@ document.querySelector(".add").addEventListener("click", () => {
 			});
 			// Save input
 			document.querySelector(".save").addEventListener("click", () => {
-				const newValue = document.querySelector(".input-modal-content > input").value;
-				inputListItem.dataset.inputvalue = newValue;
-				inputListItem.children[0].textContent = newValue;
-				// close modal on save
-				document.querySelector(".input-modal-container").remove();
+				let newValue = document.querySelector(".input-modal-content > input").value.trim();
+				/**
+				 * Validation:-
+				 * empty value not accepted
+				 * page and pages read must be numbers
+				 * pages read should be equalto or less than pages
+				 */
+				if (inputListItem.dataset.inputlabel === "Pages" || inputListItem.dataset.inputlabel === "Pages Read") {
+					newValue = Number(newValue);
+					console.log(newValue);
+				}
+				if (inputListItem.dataset.inputlabel === "Pages Read") {
+					if (
+						newValue < 0 ||
+						newValue > Number(document.querySelector('li[data-inputlabel="Pages"').dataset.inputvalue)
+					) {
+						newValue = 0;
+					}
+				}
+				if (newValue) {
+					inputListItem.dataset.inputvalue = newValue;
+					inputListItem.children[0].textContent = newValue;
+					// close modal on save
+					document.querySelector(".input-modal-container").remove();
+				} else {
+					document.querySelector(".input-modal-content > input").focus();
+					document.querySelector(".input-modal-content > input").value = "";
+				}
 			});
 		});
 	});

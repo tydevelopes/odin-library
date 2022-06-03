@@ -250,7 +250,7 @@ export const editBook = bookID => {
 export const renderInputModal = ({ inputLabel, inputValue }) => {
 	return `	<div class="input-modal-content">
 				<div class="input-label">${inputLabel}</div>
-				<input type="text" class="input" value="${inputValue}"/>
+				<input type="text" class="input" value="${inputValue}" required/>
 				<div class="buttons-container">
 					<button class="select-author">CHOOSE</button>
 					<button class="save">SAVE</button>
