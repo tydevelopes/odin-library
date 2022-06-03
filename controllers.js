@@ -320,3 +320,14 @@ export const replaceBookInfo = newBookInfo => {
 	});
 	saveBooks(books);
 };
+
+//Notification
+export const notify = message => {
+	const el = document.createElement("div");
+	el.classList.add("notify");
+	el.textContent = message;
+	document.body.append(el);
+	setTimeout(() => {
+		document.body.removeChild(el);
+	}, 2000);
+};

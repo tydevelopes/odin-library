@@ -14,6 +14,7 @@ import {
 	replaceBookInfo,
 	addBook,
 	renderEditAddContainer,
+	notify,
 } from "./controllers.js";
 import { navItems, list, listTitle, bookCount, readingNow, allBooks } from "./domElements.js";
 import { books } from "./bookListGenerator/books.js";
@@ -132,15 +133,18 @@ list.addEventListener("click", e => {
 						pages: list.querySelector('li[data-inputlabel="Pages"').dataset.inputvalue,
 						pagesRead: list.querySelector('li[data-inputlabel="Pages Read"').dataset.inputvalue,
 					};
+					const { id, title, author, pages, pagesRead } = editedBook;
+					if (id && title && author && pages && pagesRead) {
+						// save book to books in local storage
+						replaceBookInfo(editedBook);
+						// rerender active menu
+						renderList(renderedList.dataset.action);
+						document.body.removeChild(container);
+						document.body.style.overflow = "";
+						// scroll to book that was edited
+						document.querySelector(`li[data-id='${bookId}']`).scrollIntoView();
+					}
 					console.log(editedBook);
-					// save book to books in local storage
-					replaceBookInfo(editedBook);
-					// rerender active menu
-					renderList(renderedList.dataset.action);
-					document.body.removeChild(container);
-					document.body.style.overflow = "";
-					// scroll to book that was edited
-					document.querySelector(`li[data-id='${bookId}']`).scrollIntoView();
 				});
 
 				// open input modal when list input item is clicked and populate modal centent
@@ -174,7 +178,6 @@ list.addEventListener("click", e => {
 							let newValue = document.querySelector(".input-modal-content > input").value.trim();
 							if (inputListItem.dataset.inputlabel === "Pages" || inputListItem.dataset.inputlabel === "Pages Read") {
 								newValue = Number(newValue);
-								console.log(newValue);
 							}
 							if (inputListItem.dataset.inputlabel === "Pages Read") {
 								if (
@@ -192,6 +195,7 @@ list.addEventListener("click", e => {
 							} else {
 								document.querySelector(".input-modal-content > input").focus();
 								document.querySelector(".input-modal-content > input").value = "";
+								notify("Input can not be empty");
 							}
 						});
 					});
@@ -294,20 +298,29 @@ document.querySelector(".add").addEventListener("click", () => {
 			haveRead: false,
 			nowReading: false,
 		};
-		// save book to books in local storage
-		// Pass a copy of newNook
-		addBook({ ...newBook });
-		// rerender all books
-		renderList("renderAllBooks");
-		removeAllActiveClass();
-		allBooks.classList.add("active");
-		const text = allBooks.children[1].textContent;
-		listTitle.textContent = text;
+		const { id, title, author, pages, pagesRead } = newBook;
+		if (id && title && author && pages && pagesRead) {
+			// save book to books in local storage
+			// Pass a copy of newNook
+			addBook({ ...newBook });
+			// rerender all books
+			renderList("renderAllBooks");
+			removeAllActiveClass();
+			allBooks.classList.add("active");
+			const text = allBooks.children[1].textContent;
+			listTitle.textContent = text;
 
-		document.body.removeChild(container);
-		document.body.style.overflow = "";
-		// scroll to book that was edited
-		document.querySelector(`li[data-id='${newBook.id}']`).scrollIntoView();
+			document.body.removeChild(container);
+			document.body.style.overflow = "";
+			// scroll to book that was edited
+			document.querySelector(`li[data-id='${newBook.id}']`).scrollIntoView();
+		} else {
+			notify("All inputs required");
+			setTimeout(() => {
+				document.body.removeChild(container);
+				document.body.style.overflow = "";
+			}, 2002);
+		}
 	});
 
 	// open input modal when list input item is clicked and populate modal centent
