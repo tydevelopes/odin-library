@@ -51,7 +51,7 @@ export const getBooksByAuthor = name => {
 };
 
 //  functions to render contents to screen
-const renderBooks = books => {
+export const renderBooks = books => {
 	return books
 		.map(book => {
 			const { id, title, author, pages, pagesRead, favorite, toRead, haveRead, nowReading } = book;
@@ -148,9 +148,9 @@ export const renderFavorites = () => {
 
 /**
  * get all books - returns array of books
- * then go through each book at get the author array - returns array of authors array
+ * then go through each book and get the author array - returns array of authors array
  * then flatten the array - returns an array
- * them go through the authors and count books written
+ * then go through the authors and count books written
  */
 export const renderAuthors = () => {
 	const authorsAndBookCount = getAuthors();

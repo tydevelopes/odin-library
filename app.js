@@ -17,14 +17,23 @@ import {
 	notify,
 	restoreFromTrash,
 } from "./controllers.js";
-import { navItems, list, listTitle, bookCount, readingNow, allBooks } from "./domElements.js";
+import {
+	toggleThemeEl,
+	root,
+	openMenuEl,
+	navEl,
+	navContentEl,
+	navItems,
+	list,
+	listTitle,
+	bookCount,
+	readingNow,
+	allBooks,
+} from "./domElements.js";
 import { books } from "./bookListGenerator/books.js";
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 
 // toggle theme
-const toggleThemeEl = document.querySelector(".toggle-theme");
-const root = document.documentElement;
-
 toggleThemeEl.addEventListener("click", () => {
 	const newTheme = root.className === "dark" ? "light" : "dark";
 	root.className = newTheme;
@@ -32,9 +41,6 @@ toggleThemeEl.addEventListener("click", () => {
 });
 
 // nav controllers
-const openMenuEl = document.querySelector(".open-menu");
-const navEl = document.querySelector(".nav");
-const navContentEl = document.querySelector(".nav-content");
 
 // handler to Open menu with animation
 const openNav = () => {
@@ -242,13 +248,19 @@ function renderList(action) {
 			bookCount.textContent = `${authorsCount}`;
 			list.innerHTML = authorsList;
 			// Event to render books by author
+			// TODO;- render list in a separate container that covers authors list
 			const authorListItem = document.querySelectorAll(".author-list-item-container");
 			authorListItem.forEach(el => {
 				el.addEventListener("click", e => {
 					const { booksList, count, name } = renderBooksByAuthor(e.currentTarget.dataset.author);
 					bookCount.textContent = `${count}`;
-					listTitle.innerHTML = `<span>Author - </span><span class="author-name">${name}</span>`;
+					listTitle.innerHTML = `<span class="material-icons back-to-previous">subdirectory_arrow_left</span><span>Author - </span><span class="author-name">${name}</span>`;
 					list.innerHTML = booksList;
+
+					// rerender authors list
+					document.querySelector(".back-to-previous").addEventListener("click", () => {
+						renderList("renderAuthors");
+					});
 				});
 			});
 			break;

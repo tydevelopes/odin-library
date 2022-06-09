@@ -12,3 +12,10 @@ export const list = document.querySelector(".list");
 export const bookCount = document.querySelector(".book-count");
 export const readingNow = document.querySelector(".reading-now");
 export const allBooks = document.querySelector(".books");
+
+export const toggleThemeEl = document.querySelector(".toggle-theme");
+export const root = document.documentElement;
+
+export const openMenuEl = document.querySelector(".open-menu");
+export const navEl = document.querySelector(".nav");
+export const navContentEl = document.querySelector(".nav-content");
